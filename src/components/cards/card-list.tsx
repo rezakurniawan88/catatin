@@ -7,7 +7,7 @@ import { NoteItemProps } from "@/types/notes-type";
 export default function CardList() {
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
-    const otherNotes = dataNotes?.filter((data: NoteItemProps) => data.isPinned === false);
+    const otherNotes = dataNotes?.filter((data: NoteItemProps) => data.isPinned === false && data.isArchived === false);
 
     return (
         <div className="flex gap-4 flex-wrap py-3">

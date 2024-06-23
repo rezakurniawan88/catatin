@@ -4,17 +4,16 @@ import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 import { NoteItemProps } from "@/types/notes-type";
 import CardItem from "./card-item";
 
-export default function PinnedCardList() {
+export default function ArchivedCardList() {
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
-    const pinnedNotes = dataNotes?.filter((data: NoteItemProps) => data.isPinned && data.isArchived === false);
+    const archivedNotes = dataNotes?.filter((data: NoteItemProps) => data.isArchived);
 
     return (
-        <div className={`pinned mt-4 mb-10 ${pinnedNotes?.length === 0 ? "hidden" : ""}`}>
-            <h1 className="font-sans text-sm text-slate-400">Pinned</h1>
+        <div className="pinned mt-4 mb-10">
             <div className="flex gap-4 flex-wrap py-3">
-                {pinnedNotes && pinnedNotes.length > 0 ? (
-                    pinnedNotes?.map((data: NoteItemProps) => (
+                {archivedNotes && archivedNotes.length > 0 ? (
+                    archivedNotes?.map((data: NoteItemProps) => (
                         <CardItem key={data.id} data={data} />
                     ))
                 ) : (

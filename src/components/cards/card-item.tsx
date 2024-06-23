@@ -48,6 +48,24 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
         }
     });
 
+    const { mutate: onChangeArchivedStatus, isLoading: changeArchivedStatusIsLoading } = useMutation({
+        mutationKey: ["change-archived-status", data?.id],
+        mutationFn: async () => {
+            const response = await axiosInstance.patch(`/notes/change-archived/${data?.id}`, { archivedStatus: !data?.isArchived });
+            return response?.data?.message;
+        },
+        onSuccess: (data) => {
+            refetchAllNotes();
+            toast({
+                title: "Success",
+                description: `${data}`,
+            });
+        },
+        onError: (error) => {
+            console.log(error);
+        }
+    });
+
     return (
         <div key={data.id} className="relative border w-80 h-40 rounded-xl">
             <div className="flex justify-between w-full pt-4 pl-4 pr-2">
@@ -64,7 +82,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                     <div onClick={() => onChangePinnedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changePinnedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucidePin className="w-4 text-slate-500 group-hover:text-slate-700" fill={data?.isPinned ? "gray" : "white"} />)}</div>
                 </div>
                 <div className="flex gap-2">
-                    <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100"><LucideArchive className="w-4 text-slate-500" /></div>
+                    <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className="w-4 text-slate-500" fill={data?.isArchived ? "gray" : "white"} />)}</div>
                     <AlertDelete noteId={data.id} />
                 </div>
             </div>
