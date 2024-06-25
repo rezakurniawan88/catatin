@@ -6,11 +6,15 @@ import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
 import { useToast } from "../ui/use-toast";
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { ScrollArea } from "../ui/scroll-area";
+import { usePathname } from "next/navigation";
 
 export default function CardItem({ data }: { data: NoteItemProps }) {
-    const { toast } = useToast();
     const { refetch: refetchAllNotes } = useFetchAllNotes();
     const formatDate = new Date(data.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+    const { toast } = useToast();
+    const pathname = usePathname();
 
     const { mutate: onChangePinnedStatus, isLoading: changePinnedStatusIsLoading } = useMutation({
         mutationKey: ["change-pinned-status", data?.id],
@@ -67,25 +71,54 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
     });
 
     return (
-        <div key={data.id} className="relative border w-80 h-40 rounded-xl">
-            <div className="flex justify-between w-full pt-4 pl-4 pr-2">
-                <div className="mb-2">
-                    <h1 className="font-bold font-sans">{data.title}</h1>
-                    <p className="font-medium text-xs text-slate-400">{formatDate}</p>
+        <>
+            <div key={data.id} className="relative flex flex-col border w-80 h-44 rounded-xl hover:bg-slate-50 hover:cursor-pointer overflow-hidden">
+                <div className="flex justify-between w-full pt-4 pl-4 pr-2">
+                    <div className="mb-2">
+                        <h1 className="font-bold font-sans">{data.title}</h1>
+                        <p className="font-medium text-xs text-slate-400">{formatDate}</p>
+                    </div>
+                    <ModalEditNote noteId={data.id} />
                 </div>
-                <ModalEditNote noteId={data.id} />
+                <div className="flex-grow">
+                    <p className="font-sans text-sm text-slate-400 px-4 line-clamp-2">{data.content}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 w-full flex justify-between items-center p-2">
+                    <div className="flex">
+                        <div onClick={() => onChangeFavoriteStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group z-30">{changeFavoriteStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideHeart className={`w-4 group-hover:text-red-500 ${data?.isFavorite ? "text-red-500" : "text-slate-500"} `} fill={data?.isFavorite ? "red" : "white"} />)}</div>
+                        <div onClick={() => onChangePinnedStatus()} className={`flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group z-30 ${pathname == "/favorites" ? "hidden" : pathname == "/archives" ? "hidden" : ""}`}>{changePinnedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucidePin className="w-4 text-slate-500 group-hover:text-slate-700" fill={data?.isPinned ? "gray" : "white"} />)}</div>
+                    </div>
+                    <div className="flex gap-2">
+                        <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className={`w-4 ${data?.isArchived ? "text-slate-800 opacity-50" : "text-slate-500 opacity-100"}`} fill={data?.isArchived ? "gray" : "white"} />)}</div>
+                        <AlertDelete noteId={data.id} />
+                    </div>
+                </div>
+
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <div className="absolute top-0 left-0 w-full h-full bg-transparent"></div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl h-[90%]">
+                        <div className="relative">
+                            <h1 className="font-bold text-sm md:text-xl">{data.title}</h1>
+                            <h1 className="text-xs text-slate-400">{formatDate}</h1>
+                            <ScrollArea className="w-full h-1/2 py-4">
+                                <p className="font-sans text-sm text-slate-500 leading-[1.4rem]">{data.content}</p>
+                            </ScrollArea>
+                            <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-4 border-t-[1px] overflow-hidden bg-white">
+                                <div className="flex gap-4">
+                                    <div onClick={() => onChangeFavoriteStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changeFavoriteStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideHeart className={`w-4 group-hover:text-red-500 ${data?.isFavorite ? "text-red-500" : "text-slate-500"} `} fill={data?.isFavorite ? "red" : "white"} />)}</div>
+                                    <div onClick={() => onChangePinnedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changePinnedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucidePin className="w-4 text-slate-500 group-hover:text-slate-700" fill={data?.isPinned ? "gray" : "white"} />)}</div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className={`w-4 ${data?.isArchived ? "text-slate-800 opacity-50" : "text-slate-500 opacity-100"}`} fill={data?.isArchived ? "gray" : "white"} />)}</div>
+                                    <AlertDelete noteId={data.id} />
+                                </div>
+                            </div>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
-            <p className="font-sans text-sm text-slate-400 px-4">{data.content}</p>
-            <div className="absolute bottom-0 left-0 w-full flex justify-between items-center p-2">
-                <div className="flex">
-                    <div onClick={() => onChangeFavoriteStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changeFavoriteStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideHeart className={`w-4 group-hover:text-red-500 ${data?.isFavorite ? "text-red-500" : "text-slate-500"} `} fill={data?.isFavorite ? "red" : "white"} />)}</div>
-                    <div onClick={() => onChangePinnedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changePinnedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucidePin className="w-4 text-slate-500 group-hover:text-slate-700" fill={data?.isPinned ? "gray" : "white"} />)}</div>
-                </div>
-                <div className="flex gap-2">
-                    <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className="w-4 text-slate-500" fill={data?.isArchived ? "gray" : "white"} />)}</div>
-                    <AlertDelete noteId={data.id} />
-                </div>
-            </div>
-        </div>
+        </>
     )
 }

@@ -1,7 +1,7 @@
 import Sidebar from "@/components/sidebar"
 import Header from "@/components/header"
-import CardList from "@/components/cards/card-list";
 import PinnedCardList from "@/components/cards/pinned-card-list";
+import OthersCardList from "@/components/cards/others-card-list";
 import ModalAddNote from "@/components/modal/modal-add-note";
 
 export default function Home() {
@@ -13,10 +13,7 @@ export default function Home() {
         <div className="py-8">
           <h1 className="font-bold font-sans text-xl">All Notes</h1>
           <PinnedCardList />
-          <div className="others mt-4 mb-10">
-            <h1 className="font-sans text-sm text-slate-400">Others</h1>
-            <CardList />
-          </div>
+          <OthersCardList />
         </div>
         <ModalAddNote />
       </div>

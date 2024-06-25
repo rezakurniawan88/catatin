@@ -28,7 +28,7 @@ export default function Sidebar() {
                         <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">Archives</h2>
                     </Link>
 
-                    <li className="absolute w-full bottom-14 left-0 flex items-center p-2 text-gray-600">
+                    <li className="absolute w-full bottom-14 left-0 flex items-center p-2 text-gray-600 text-center">
                         <h2 className="flex-1 ml-2.5 text-xs font-sans whitespace-nowrap">{`CATAT.in @${new Date().getFullYear()}`}</h2>
                     </li>
                 </ul>

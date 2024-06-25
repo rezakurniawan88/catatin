@@ -30,7 +30,7 @@ export default function AlertDelete({ noteId }: { noteId: string }) {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group"><LucideTrash className="w-4 text-slate-500 group-hover:text-red-500" /></div>
+                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group z-30"><LucideTrash className="w-4 text-slate-500 group-hover:text-red-500" /></div>
             </AlertDialogTrigger>
             <AlertDialogContent className="max-w-md md:max-w-xl">
                 <AlertDialogHeader>

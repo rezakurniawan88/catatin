@@ -84,7 +84,7 @@ export default function ModalEditNote({ noteId }: { noteId: string }) {
     return (
         <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
             <DialogTrigger asChild>
-                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100"><LucidePencil className="w-4 text-slate-500" /></div>
+                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30"><LucidePencil className="w-4 text-slate-500" /></div>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
