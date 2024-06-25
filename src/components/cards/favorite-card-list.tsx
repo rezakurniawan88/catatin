@@ -4,11 +4,17 @@ import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 import { NoteItemProps } from "@/types/notes-type";
 import CardItem from "./card-item";
 import LoadingCard from "../loading-card";
+import { useSearchContext } from "@/context/search-context";
 
 export default function FavoriteCardList() {
+    const { debouncedSearchValue } = useSearchContext();
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
-    const favoriteNotes = dataNotes?.filter((data: NoteItemProps) => data.isFavorite);
+    const filteredNotes = dataNotes?.filter((data: NoteItemProps) =>
+        data.title.toLowerCase().includes(debouncedSearchValue.toLowerCase())
+    );
+
+    const favoriteNotes = filteredNotes?.filter((data: NoteItemProps) => data.isFavorite);
 
     return (
         <div className="pinned mt-4 mb-10">

@@ -1,5 +1,6 @@
 "use client";
 
+import { SearchProvider } from "@/context/search-context";
 import React from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 
@@ -13,7 +14,11 @@ function Providers({ children }: React.PropsWithChildren) {
     }));
 
     return (
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
+        <QueryClientProvider client={client}>
+            <SearchProvider>
+                {children}
+            </SearchProvider>
+        </QueryClientProvider>
     );
 }
 

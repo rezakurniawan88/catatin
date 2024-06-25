@@ -99,13 +99,13 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                         <div className="absolute top-0 left-0 w-full h-full bg-transparent"></div>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl h-[90%]">
-                        <div className="relative">
+                        <div className="relative pl-2 pr-1">
                             <h1 className="font-bold text-sm md:text-xl">{data.title}</h1>
                             <h1 className="text-xs text-slate-400">{formatDate}</h1>
-                            <ScrollArea className="w-full h-1/2 py-4">
-                                <p className="font-sans text-sm text-slate-500 leading-[1.4rem]">{data.content}</p>
+                            <ScrollArea className="w-full h-1/2 py-4 pr-3">
+                                <p className="font-sans text-sm text-justify text-slate-500 leading-[1.4rem]">{data.content}</p>
                             </ScrollArea>
-                            <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-4 border-t-[1px] overflow-hidden bg-white">
+                            <div className="fixed bottom-0 left-0 w-full flex justify-between items-center py-4 px-6 border-t-[1px] overflow-hidden bg-white">
                                 <div className="flex gap-4">
                                     <div onClick={() => onChangeFavoriteStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changeFavoriteStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideHeart className={`w-4 group-hover:text-red-500 ${data?.isFavorite ? "text-red-500" : "text-slate-500"} `} fill={data?.isFavorite ? "red" : "white"} />)}</div>
                                     <div onClick={() => onChangePinnedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 group">{changePinnedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucidePin className="w-4 text-slate-500 group-hover:text-slate-700" fill={data?.isPinned ? "gray" : "white"} />)}</div>

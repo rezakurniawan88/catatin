@@ -4,11 +4,17 @@ import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 import { NoteItemProps } from "@/types/notes-type";
 import CardItem from "./card-item";
 import LoadingCard from "../loading-card";
+import { useSearchContext } from "@/context/search-context";
 
 export default function ArchivedCardList() {
+    const { debouncedSearchValue } = useSearchContext();
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
-    const archivedNotes = dataNotes?.filter((data: NoteItemProps) => data.isArchived);
+    const filteredNotes = dataNotes?.filter((data: NoteItemProps) =>
+        data.title.toLowerCase().includes(debouncedSearchValue.toLowerCase())
+    );
+
+    const archivedNotes = filteredNotes?.filter((data: NoteItemProps) => data.isArchived);
 
     return (
         <div className="pinned mt-4 mb-10">
