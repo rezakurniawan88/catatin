@@ -16,11 +16,9 @@ import { useEffect, useState } from "react";
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 
 export default function ModalEditNote({ noteId }: { noteId: string }) {
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const { refetch: refetchAllNotes } = useFetchAllNotes();
     const { toast } = useToast();
-
-    console.log("noteID :", noteId);
+    const { refetch: refetchAllNotes } = useFetchAllNotes();
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     const formSchema = z.object({
         title: z.string().min(2).max(100),
@@ -77,7 +75,6 @@ export default function ModalEditNote({ noteId }: { noteId: string }) {
     }, [form, form.setValue, dataSingleNote]);
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         onEditNote(values);
     };
 
@@ -86,44 +83,44 @@ export default function ModalEditNote({ noteId }: { noteId: string }) {
             <DialogTrigger asChild>
                 <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30"><LucidePencil className="w-4 text-slate-500" /></div>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-md">
                 <DialogHeader>
-                    <DialogTitle className="text-sm md:text-lg">Edit Note</DialogTitle>
+                    <DialogTitle className="text-lg">Edit Note</DialogTitle>
                     <DialogDescription className="text-xs md:text-sm">
                         Change your note here. Click save when youre done.
                     </DialogDescription>
-                    <Form {...form}>
-                        <form className="w-full pt-3 pb-4 space-y-4" encType="multipart/form-data">
-                            <FormField
-                                control={form.control}
-                                name="title"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="font-semibold text-xs md:text-sm">Title</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Notes title." className="text-xs md:text-sm py-1" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="content"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="font-semibold text-xs md:text-sm">Content</FormLabel>
-                                        <FormControl>
-                                            <Textarea placeholder="Note content." {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </form>
-                    </Form>
-                    <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6">{editNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Save Note"}</Button>
                 </DialogHeader>
+                <Form {...form}>
+                    <form className="w-full pt-3 pb-4 space-y-4" encType="multipart/form-data">
+                        <FormField
+                            control={form.control}
+                            name="title"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="font-semibold text-sm">Title</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Notes title." className="text-xs md:text-sm py-1" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="content"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="font-semibold text-sm">Content</FormLabel>
+                                    <FormControl>
+                                        <Textarea placeholder="Note content." {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </form>
+                </Form>
+                <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6">{editNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Save Note"}</Button>
             </DialogContent>
         </Dialog>
     )

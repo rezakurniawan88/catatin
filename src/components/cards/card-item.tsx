@@ -72,7 +72,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
 
     return (
         <>
-            <div key={data.id} className="relative flex flex-col border w-80 h-44 rounded-xl hover:bg-slate-50 hover:cursor-pointer overflow-hidden">
+            <div key={data.id} className="relative flex flex-col border w-48 sm:w-80 h-44 rounded-xl hover:bg-slate-50 hover:cursor-pointer overflow-hidden">
                 <div className="flex justify-between w-full pt-4 pl-4 pr-2">
                     <div className="mb-2">
                         <h1 className="font-bold font-sans">{data.title}</h1>
@@ -98,9 +98,9 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                     <DialogTrigger asChild>
                         <div className="absolute top-0 left-0 w-full h-full bg-transparent"></div>
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl h-[90%]">
+                    <DialogContent className="max-w-full h-full sm:max-w-2xl sm:h-[90%]">
                         <div className="relative pl-2 pr-1">
-                            <h1 className="font-bold text-sm md:text-xl">{data.title}</h1>
+                            <h1 className="font-bold text-lg sm:text-xl">{data.title}</h1>
                             <h1 className="text-xs text-slate-400">{formatDate}</h1>
                             <ScrollArea className="w-full h-1/2 py-4 pr-3">
                                 <p className="font-sans text-sm text-justify text-slate-500 leading-[1.4rem]">{data.content}</p>

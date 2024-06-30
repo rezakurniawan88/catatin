@@ -21,8 +21,8 @@ const debounce = (func: Function, delay: number) => {
 };
 
 export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
-    const [searchValue, setSearchValue] = useState('');
-    const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
+    const [searchValue, setSearchValue] = useState<string>('');
+    const [debouncedSearchValue, setDebouncedSearchValue] = useState<string>('');
     const debouncedSearch = useRef<ReturnType<typeof debounce>>();
 
     useEffect(() => {
