@@ -81,7 +81,7 @@ export default function ModalEditNote({ noteId }: { noteId: string }) {
     return (
         <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
             <DialogTrigger asChild>
-                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30"><LucidePencil className="w-4 text-slate-500" /></div>
+                <div className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30 dark:hover:bg-gray-600"><LucidePencil className="w-4 text-slate-500" /></div>
             </DialogTrigger>
             <DialogContent className="max-w-md">
                 <DialogHeader>
@@ -120,7 +120,7 @@ export default function ModalEditNote({ noteId }: { noteId: string }) {
                         />
                     </form>
                 </Form>
-                <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6">{editNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Save Note"}</Button>
+                <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6 dark:bg-gray-800 dark:hover:bg-gray-900">{editNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Save Note"}</Button>
             </DialogContent>
         </Dialog>
     )

@@ -105,7 +105,7 @@ export default function ModalAddNote({ displayDesktop }: { displayDesktop: boole
                         />
                     </form>
                 </Form>
-                <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6">{addNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Create Note"}</Button>
+                <Button onClick={form.handleSubmit(onSubmit)} className="w-full bg-black text-white text-xs rounded-lg hover:bg-gray-900 md:mt-6 dark:bg-gray-800 dark:hover:bg-gray-900">{addNoteIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Create Note"}</Button>
             </DialogContent>
         </Dialog>
     )

@@ -1,8 +1,9 @@
 "use client";
 
 import { SearchProvider } from "@/context/search-context";
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ThemeProvider } from "next-themes";
 
 function Providers({ children }: React.PropsWithChildren) {
     const [client] = React.useState(new QueryClient({
@@ -12,12 +13,29 @@ function Providers({ children }: React.PropsWithChildren) {
             }
         }
     }));
+    const [mounted, setMounted] = React.useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <QueryClientProvider client={client}>
+                <SearchProvider>
+                    {children}
+                </SearchProvider>
+            </QueryClientProvider>
+        )
+    }
 
     return (
         <QueryClientProvider client={client}>
-            <SearchProvider>
-                {children}
-            </SearchProvider>
+            <ThemeProvider attribute="class" defaultTheme="light">
+                <SearchProvider>
+                    {children}
+                </SearchProvider>
+            </ThemeProvider>
         </QueryClientProvider>
     );
 }
