@@ -4,6 +4,7 @@ import { SearchProvider } from "@/context/search-context";
 import React, { useEffect } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ThemeProvider } from "next-themes";
+import { SidebarProvider } from "@/context/sidebar-context";
 
 function Providers({ children }: React.PropsWithChildren) {
     const [client] = React.useState(new QueryClient({
@@ -33,7 +34,9 @@ function Providers({ children }: React.PropsWithChildren) {
         <QueryClientProvider client={client}>
             <ThemeProvider attribute="class" defaultTheme="light">
                 <SearchProvider>
-                    {children}
+                    <SidebarProvider>
+                        {children}
+                    </SidebarProvider>
                 </SearchProvider>
             </ThemeProvider>
         </QueryClientProvider>

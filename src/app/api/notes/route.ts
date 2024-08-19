@@ -25,14 +25,7 @@ export async function GET() {
             }
         });
 
-        return NextResponse.json(
-            {
-                data: notes
-            },
-            {
-                status: 200
-            }
-        );   
+        return NextResponse.json({ data: notes }, { status: 200 });   
     } catch (error) {
         console.log(error);
     }

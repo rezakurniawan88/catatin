@@ -13,7 +13,7 @@ import { format } from "date-fns";
 
 export default function CardItem({ data }: { data: NoteItemProps }) {
     const { refetch: refetchAllNotes } = useFetchAllNotes();
-    // const formatDate = new Date(data.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+    const formatDate = format(data?.createdAt, "d MMMM yyyy");
     const { toast } = useToast();
     const pathname = usePathname();
 
@@ -77,7 +77,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                 <div className="flex justify-between w-full pt-4 pl-4 pr-2">
                     <div className="mb-2">
                         <h1 className="font-bold font-sans">{data.title}</h1>
-                        <p className="font-medium text-xs text-slate-400 dark:text-gray-400">{format(data?.createdAt, "d MMMM yyyy")}</p>
+                        <p className="font-medium text-xs text-slate-400 dark:text-gray-400">{formatDate}</p>
                     </div>
                     <ModalEditNote noteId={data.id} />
                 </div>
@@ -102,7 +102,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                     <DialogContent className="max-w-full h-full sm:max-w-2xl sm:h-[90%] dark:bg-gray-900">
                         <div className="relative pl-2 pr-1">
                             <h1 className="font-bold text-lg sm:text-xl">{data.title}</h1>
-                            <h1 className="text-xs text-slate-400">{format(data?.createdAt, "d MMMM yyyy")}</h1>
+                            <h1 className="text-xs text-slate-400">{formatDate}</h1>
                             <ScrollArea className="w-full h-1/2 py-4 pr-3">
                                 <p className="font-sans text-sm text-justify text-slate-500 leading-[1.4rem]">{data.content}</p>
                             </ScrollArea>
