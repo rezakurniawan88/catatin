@@ -7,6 +7,7 @@ import { signIn, signOut } from "next-auth/react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
 import { LucideLogOut, LucideMenu } from "lucide-react";
 import { useSidebarContext } from "@/context/sidebar-context";
+import Link from "next/link";
 
 export default function Header({ session }: any) {
     const { sidebarIsOpen, setSidebarIsOpen } = useSidebarContext();
@@ -50,7 +51,9 @@ export default function Header({ session }: any) {
             ) : (
                 <div className="flex gap-2 items-center">
                     <Button onClick={() => signIn()} className="text-xs sm:text-sm">Sign In</Button>
-                    <Button variant="secondary" className="text-xs sm:text-sm">Sign Up</Button>
+                    <Link href="/auth/register">
+                        <Button variant="secondary" className="text-xs sm:text-sm">Sign Up</Button>
+                    </Link>
                 </div>
             )}
         </div>

@@ -56,7 +56,7 @@ export default function RegisterPage() {
                 title: "Success",
                 description: `${data}`,
             });
-            router.push("/");
+            router.push("/auth/login");
         },
         onError: (error) => {
             toast({
