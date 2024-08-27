@@ -1,6 +1,5 @@
 import ArchivedCardList from '@/components/cards/archived-card-list'
 import Header from '@/components/header'
-import ModalAddNote from '@/components/modal/modal-add-note';
 import Sidebar from '@/components/sidebar'
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
@@ -18,7 +17,6 @@ export default async function ArchivesPage() {
                     <ArchivedCardList />
                 </div>
             </div>
-            <ModalAddNote displayDesktop={false} />
         </main>
     )
 }

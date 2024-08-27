@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { useState } from "react";
-import { LucideCheckSquare, LucideX } from "lucide-react";
+import { LucideCheckSquare, LucideTvMinimal, LucideX } from "lucide-react";
 import { useSidebarContext } from "@/context/sidebar-context";
 
 export default function Sidebar() {
@@ -33,6 +33,11 @@ export default function Sidebar() {
                     <Link href="/todo" onClick={() => setSidebarIsOpen(false)} className={`flex items-center p-2 rounded-lg pl-8 text-slate-500 hover:bg-gray-50 dark:hover:bg-gray-900 ${pathname == "/todo" ? "font-semibold text-slate-800 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800" : "text-gray-900"}`}>
                         <LucideCheckSquare className="w-4 h-4 transition duration-75" />
                         <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">To Do</h2>
+                    </Link>
+
+                    <Link href="/board" onClick={() => setSidebarIsOpen(false)} className={`flex items-center p-2 rounded-lg pl-8 text-slate-500 hover:bg-gray-50 dark:hover:bg-gray-900 ${pathname == "/board" ? "font-semibold text-slate-800 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800" : "text-gray-900"}`}>
+                        <LucideTvMinimal className="w-4 h-4 transition duration-75" />
+                        <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">Board</h2>
                     </Link>
 
                     <Link href="/favorites" onClick={() => setSidebarIsOpen(false)} className={`flex items-center p-2 rounded-lg pl-8 text-slate-500 hover:bg-gray-50 dark:hover:bg-gray-900 ${pathname == "/favorites" ? "font-semibold text-slate-800 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800" : "text-gray-900"}`}>
