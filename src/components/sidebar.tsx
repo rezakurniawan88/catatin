@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { useState } from "react";
-import { LucideCheckSquare, LucideTvMinimal, LucideX } from "lucide-react";
+import { LucideCheckSquare, LucideKanban, LucideTvMinimal, LucideX } from "lucide-react";
 import { useSidebarContext } from "@/context/sidebar-context";
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const { setTheme } = useTheme();
+    const { setTheme, theme } = useTheme();
     const [checkedTheme, setCheckedTheme] = useState<boolean>(false);
     const { sidebarIsOpen, setSidebarIsOpen } = useSidebarContext();
 
@@ -21,7 +21,7 @@ export default function Sidebar() {
                 <div className="flex flex-grow justify-center">
                     <h1 className="font-bold font-sans text-2xl">Catat.in</h1>
                 </div>
-                <button onClick={() => setSidebarIsOpen(!sidebarIsOpen)} className="p-1 mr-2 rounded-full items-end hover:bg-slate-100 sm:hidden"><LucideX size={16} /></button>
+                <button onClick={() => setSidebarIsOpen(!sidebarIsOpen)} className="p-1 mr-2 rounded-full items-end hover:bg-slate-100 hover:dark:bg-slate-800 sm:hidden"><LucideX size={16} /></button>
             </div>
             <div className="relative h-full overflow-y-auto overflow-x-hidden">
                 <ul className="space-y-2 font-medium">
@@ -40,6 +40,11 @@ export default function Sidebar() {
                         <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">Board</h2>
                     </Link>
 
+                    <Link href="/kanban" onClick={() => setSidebarIsOpen(false)} className={`flex items-center p-2 rounded-lg pl-8 text-slate-500 hover:bg-gray-50 dark:hover:bg-gray-900 ${pathname == "/kanban" ? "font-semibold text-slate-800 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800" : "text-gray-900"}`}>
+                        <LucideKanban className="w-4 h-4 transition duration-75" />
+                        <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">Kanban</h2>
+                    </Link>
+
                     <Link href="/favorites" onClick={() => setSidebarIsOpen(false)} className={`flex items-center p-2 rounded-lg pl-8 text-slate-500 hover:bg-gray-50 dark:hover:bg-gray-900 ${pathname == "/favorites" ? "font-semibold text-slate-800 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800" : "text-gray-900"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 transition duration-75"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
                         <h2 className="flex-1 ml-2.5 text-sm font-sans whitespace-nowrap">Favorites</h2>
@@ -52,7 +57,7 @@ export default function Sidebar() {
                     <div className="flex items-center space-x-2 pl-8 p-2">
                         <Switch id="dark-mode"
                             className="dark:bg-gray-800"
-                            checked={checkedTheme}
+                            checked={theme === "dark" ? true : false}
                             onCheckedChange={() => {
                                 setCheckedTheme(!checkedTheme);
                                 setTheme(checkedTheme ? "light" : "dark")
