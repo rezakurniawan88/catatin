@@ -21,19 +21,19 @@ Catatin is a comprehensive note-taking and project management application built 
 - Whiteboard: Tldraw
 
 ## Demo
-[Catatin Demo Preview (https://catatin-notes-app.vercel.app)](https://catatin-notes-app.vercel.app)
+[Catatin Demo Preview](https://catatin-notes-app.vercel.app)
 
 ## Getting Started
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/rezakurniawan88/notes-app.git
+git clone https://github.com/rezakurniawan88/catatin.git
 ```
 
 2. Install dependencies:
 ```bash
-cd notes-app
+cd catatin
 npm install
 ```
 
