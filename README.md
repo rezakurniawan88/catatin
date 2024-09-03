@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Catatin - Notes & Project Management
+
+![Catatin](/public/images/demo.png)
+
+Catatin is a comprehensive note-taking and project management application built with Next.js, Prisma, and Tailwind CSS.
+
+## Features
+
+- Authentication: Register and login to your account.
+- Notes: Create, edit, and organize your notes.
+- To-Do List: Manage your tasks and deadlines.
+- Board: Visualize projects.
+- Kanban: Use the Kanban methodology for efficient workflow.
+- Archives and Favorites: Save and access important notes and tasks easily.
+
+## Technologies Used
+
+- Frontend: Next.js, Tailwind CSS, Shadcn
+- Backend: Prisma ORM, MongoDB Atlas
+- Authentication: Next-Auth
+- Whiteboard: Tldraw
+
+## Demo
+[Catatin Demo Preview (https://catatin-notes-app.vercel.app)](https://catatin-notes-app.vercel.app)
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/rezakurniawan88/notes-app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+cd notes-app
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables :
+```bash
+cp .env.example .env
+```
+After that, edit the .env file according to the environment variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Set up MongoDB Atlas:
+- Register an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register).
+- Create a MongoDB Atlas cluster.
+- Create a database and a user.
 
-## Learn More
+5. Run prisma generate:
+```bash
+npx prisma generate
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. Start the development server:
+```bash
+npm run dev
+```
