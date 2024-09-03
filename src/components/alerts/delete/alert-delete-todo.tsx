@@ -1,8 +1,8 @@
 import { LucideLoader2, LucideTrash } from "lucide-react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../../ui/alert-dialog";
 import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import useFetchAllTodos from "@/hooks/todos/useFetchAllTodos";
 
 export default function AlertDeleteTodo({ todoId }: { todoId: string }) {

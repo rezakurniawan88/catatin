@@ -3,12 +3,12 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-// GET Notes
+// GET All Notes
 export async function GET() {
     const session = await getServerSession(authOptions);
     const userId = session?.id;
     if (!userId) {
-        return NextResponse.json({message: "Login First"}, { status: 401 });
+        return NextResponse.json({message: "Unauthorized"}, { status: 401 });
     }
     try {
         const notes = await prisma.note.findMany({
@@ -27,7 +27,8 @@ export async function GET() {
 
         return NextResponse.json({ data: notes }, { status: 200 });   
     } catch (error) {
-        console.log(error);
+        console.log(error, "GET_ALL_NOTES_ERROR");
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }
 
@@ -38,14 +39,7 @@ export async function POST(req: Request) {
     const userId = session?.id;
 
     if (!userId) {
-        return NextResponse.json(
-          {
-            message: 'Unauthorized',
-          },
-          {
-            status: 401,
-          }
-        );
+        return NextResponse.json({message: 'Unauthorized'}, { status: 401 });
     }
 
     try {
@@ -67,6 +61,7 @@ export async function POST(req: Request) {
             }
         );   
     } catch (error) {
-        console.log(error);
+        console.log(error, "CREATE_NOTE_ERROR");
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }

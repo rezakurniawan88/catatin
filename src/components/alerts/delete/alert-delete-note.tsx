@@ -1,11 +1,11 @@
 import { LucideLoader2, LucideTrash } from "lucide-react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../../ui/alert-dialog";
 import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 
-export default function AlertDelete({ noteId }: { noteId: string }) {
+export default function AlertDeleteNote({ noteId }: { noteId: string }) {
     const { toast } = useToast();
     const { refetch: refetchAllNotes } = useFetchAllNotes();
 

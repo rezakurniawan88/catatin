@@ -3,8 +3,8 @@ import Header from "@/components/header"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import ModalAddTodo from "@/components/modal/modal-add-todo";
-import TodoCardList from "@/components/cards/todo-card-list";
-import PinnedTodoCardList from "@/components/cards/pinned-todo-card-list";
+import TodoCardList from "@/components/cards/card-lists/todo-card-list";
+import PinnedTodoCardList from "@/components/cards/card-lists/pinned-todo-card-list";
 
 export default async function ToDoPage() {
     const session = await getServerSession(authOptions);

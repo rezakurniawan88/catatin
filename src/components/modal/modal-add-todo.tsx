@@ -42,14 +42,11 @@ export default function ModalAddTodo({ displayDesktop }: { displayDesktop: boole
                 todoRef.current.value = '';
             }
         }
-        console.log(todo);
     };
 
     const removeTodoInit = (index: number) => {
         setInitTodo(initTodo.filter((_: any, i: number) => i !== index));
     }
-
-    console.log(initTodo);
 
     const { mutate: onAddTodo, isLoading: addTodoIsLoading } = useMutation({
         mutationKey: ['createTodo'],
@@ -79,14 +76,16 @@ export default function ModalAddTodo({ displayDesktop }: { displayDesktop: boole
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         onAddTodo(values);
-        console.log(values);
     };
 
     return (
         <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
             <DialogTrigger asChild>
-                <button className={`fixed bottom-12 sm:bottom-5 right-5 p-4 bg-slate-900 rounded-full hover:bg-slate-700 z-50 ${displayDesktop ? "block" : "block sm:hidden"}`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                <button className={`fixed bottom-10 md:bottom-5 right-5 p-4 hover:py-4 hover:px-5 flex items-center bg-slate-900 text-white rounded-full group hover:transition-all dark:bg-slate-800 z-40 ${displayDesktop ? "block" : "block sm:hidden"}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
+                    </svg>
+                    <p className="text-xs font-semibold hidden group-hover:block">Create Todo</p>
                 </button>
             </DialogTrigger>
             <DialogContent className="max-w-md">

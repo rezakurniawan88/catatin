@@ -4,17 +4,27 @@ import { TodoItemProps } from "@/types/todo-type";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-// Get all todos
+// Get All Todos
 export async function GET() {
+    const session = await getServerSession(authOptions);
+    const userId = session?.id;
+
+    if (!userId) {
+        return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+
     try {
-        const result = await prisma.todo.findMany({
+        const todos = await prisma.todo.findMany({
+            where: {
+                userId
+            },
             include: {
                 todolist: true
             }
         });
-        return NextResponse.json({ data: result }, { status: 200});
+        return NextResponse.json({ data: todos }, { status: 200});
     } catch (error) {
-        console.log(error, "GET_TODOS_ERROR");
+        console.log(error, "GET_ALL_TODOS_ERROR");
         return NextResponse.json("Internal Server Error", { status: 500});
     }
 }
@@ -70,7 +80,8 @@ export async function PUT(req: Request) {
     try {
         const todo = await prisma.todo.update({
             where: {
-                id: todoId
+                id: todoId,
+                userId
             },
             data: {
                 title: todoTitle
@@ -80,7 +91,7 @@ export async function PUT(req: Request) {
         todolist.map(async (todoItem: TodoItemProps) => {
             await prisma.todoList.update({
                 where: {
-                    id: todoItem?.id
+                    id: todoItem?.id,
                 },
                 data: {
                     title: todoItem?.title
@@ -94,6 +105,6 @@ export async function PUT(req: Request) {
         }, { status: 200 });
     } catch (error) {
         console.log(error, "UPDATE_TODO_ERROR");
-        return NextResponse.json("Internal Server Error", { status: 500});       
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }

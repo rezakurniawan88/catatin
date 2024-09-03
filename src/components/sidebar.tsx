@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { useState } from "react";
-import { LucideCheckSquare, LucideKanban, LucideTvMinimal, LucideX } from "lucide-react";
+import { LucideBookOpenText, LucideCheckSquare, LucideKanban, LucideTvMinimal, LucideX } from "lucide-react";
 import { useSidebarContext } from "@/context/sidebar-context";
 
 export default function Sidebar() {
@@ -18,7 +18,8 @@ export default function Sidebar() {
     return (
         <aside className={`fixed top-0 left-0 z-40 w-64 h-screen pt-6 pb-4 px-2 transition-transform ${sidebarIsOpen ? "" : "-translate-x-full"}  bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-darkPrimary dark:border-gray-600`}>
             <div className="flex justify-between items-center w-full mb-6">
-                <div className="flex flex-grow justify-center">
+                <div className="flex flex-grow justify-center items-center gap-2">
+                    <LucideBookOpenText size={20} />
                     <h1 className="font-bold font-sans text-2xl">Catat.in</h1>
                 </div>
                 <button onClick={() => setSidebarIsOpen(!sidebarIsOpen)} className="p-1 mr-2 rounded-full items-end hover:bg-slate-100 hover:dark:bg-slate-800 sm:hidden"><LucideX size={16} /></button>

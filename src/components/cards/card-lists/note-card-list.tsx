@@ -1,12 +1,12 @@
 "use client"
 
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
-import CardItem from "./card-item";
+import NoteCardItem from "../card-item/note-card-item";
 import { NoteItemProps } from "@/types/notes-type";
-import LoadingCard from "../loading-card";
+import LoadingCard from "../../loading-card";
 import { useSearchContext } from "@/context/search-context";
 
-export default function OthersCardList() {
+export default function NoteCardList() {
     const { debouncedSearchValue } = useSearchContext();
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
@@ -25,7 +25,7 @@ export default function OthersCardList() {
                 ) :
                     otherNotes && otherNotes.length > 0 ? (
                         otherNotes?.map((data: NoteItemProps) => (
-                            <CardItem key={data.id} data={data} />
+                            <NoteCardItem key={data.id} data={data} />
                         ))) : (
                         <div className="w-full">
                             <h1 className="text-slate-400 text-center">No Data Notes</h1>

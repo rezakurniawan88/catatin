@@ -2,7 +2,7 @@ import { Draggable } from "@hello-pangea/dnd";
 import { format } from "date-fns";
 import { useState } from "react";
 import ModalEditKanban from "../modal/modal-edit-kanban";
-import AlertDeleteKanban from "../alert-delete-kanban";
+import AlertDeleteKanban from "../alerts/delete/alert-delete-kanban";
 import { LucideLoader2 } from "lucide-react";
 import { KanbanItemProps } from "@/types/kanban-type";
 

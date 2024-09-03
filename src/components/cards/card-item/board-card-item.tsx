@@ -4,10 +4,10 @@ import { format } from "date-fns";
 import { LucideArchive, LucideHeart, LucideLoader2, LucidePin } from "lucide-react";
 import Link from "next/link";
 import { useMutation } from "react-query";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import { BoardItemProps } from "@/types/board-type";
 import { usePathname } from "next/navigation";
-import AlertDeleteBoard from "../alert-delete-board";
+import AlertDeleteBoard from "../../alerts/delete/alert-delete-board";
 
 export default function BoardCardItem({ board }: { board: BoardItemProps }) {
     const { refetch: refetchAllBoards } = useFetchAllBoards();

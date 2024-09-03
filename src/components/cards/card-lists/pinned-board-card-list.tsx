@@ -1,11 +1,11 @@
 "use client"
 
-import LoadingCard from '../loading-card'
+import LoadingCard from '../../loading-card'
 import useFetchAllBoards from '@/hooks/boards/useFetchAllBoards';
-import BoardCardItem from './board-card-item';
+import BoardCardItem from '../card-item/board-card-item';
 import { useSearchContext } from '@/context/search-context';
 import { BoardItemProps } from '@/types/board-type';
-import Search from '../search';
+import Search from '../../search';
 
 export default function PinnedBoardCardList() {
     const { debouncedSearchValue } = useSearchContext();
@@ -20,7 +20,7 @@ export default function PinnedBoardCardList() {
     return (
         <>
             <Search display={true} />
-            <h1 className="font-bold font-sans text-xl mt-6">Boards</h1>
+            <h1 className="font-bold font-sans text-xl mt-6 md:mt-0">Boards</h1>
             <div className={`pinned mt-4 mb-10 ${pinnedBoards?.length === 0 ? "hidden" : ""}`}>
                 <h1 className="font-sans text-sm text-slate-400">Pinned</h1>
                 <div className="flex gap-4 flex-wrap py-3">

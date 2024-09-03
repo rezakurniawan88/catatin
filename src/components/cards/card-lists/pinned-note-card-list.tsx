@@ -2,12 +2,12 @@
 
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 import { NoteItemProps } from "@/types/notes-type";
-import CardItem from "./card-item";
-import LoadingCard from "../loading-card";
+import NoteCardItem from "../card-item/note-card-item";
+import LoadingCard from "../../loading-card";
 import { useSearchContext } from "@/context/search-context";
-import Search from "../search";
+import Search from "../../search";
 
-export default function PinnedCardList() {
+export default function PinnedNoteCardList() {
     const { debouncedSearchValue } = useSearchContext();
     const { data: dataNotes, isLoading: loadingDataNotes } = useFetchAllNotes();
 
@@ -20,7 +20,7 @@ export default function PinnedCardList() {
     return (
         <>
             <Search display={true} />
-            <h1 className="font-bold font-sans text-xl mt-6">All Notes</h1>
+            <h1 className="font-bold font-sans text-xl mt-6 md:mt-0">All Notes</h1>
             <div className={`pinned mt-4 mb-10 ${pinnedNotes?.length === 0 ? "hidden" : ""}`}>
                 <h1 className="font-sans text-sm text-slate-400">Pinned</h1>
                 <div className="flex gap-4 flex-wrap py-3">
@@ -29,7 +29,7 @@ export default function PinnedCardList() {
                     ) :
                         pinnedNotes && pinnedNotes.length > 0 ? (
                             pinnedNotes?.map((data: NoteItemProps) => (
-                                <CardItem key={data.id} data={data} />
+                                <NoteCardItem key={data.id} data={data} />
                             ))
                         ) : (
                             <div className="w-full">

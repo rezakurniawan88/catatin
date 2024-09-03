@@ -1,8 +1,8 @@
 "use client"
 
 import useFetchAllTodos from '@/hooks/todos/useFetchAllTodos';
-import LoadingCard from '../loading-card'
-import TodoCardItem from './todo-card-item'
+import LoadingCard from '../../loading-card'
+import TodoCardItem from '../card-item/todo-card-item'
 import { TodoItemProps } from '@/types/todo-type';
 import { useSearchContext } from '@/context/search-context';
 

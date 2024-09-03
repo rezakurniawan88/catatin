@@ -2,15 +2,15 @@
 
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
 import { NoteItemProps } from "@/types/notes-type";
-import CardItem from "./card-item";
-import LoadingCard from "../loading-card";
+import NoteCardItem from "../card-item/note-card-item";
+import LoadingCard from "../../loading-card";
 import { useSearchContext } from "@/context/search-context";
 import useFetchAllTodos from "@/hooks/todos/useFetchAllTodos";
 import { TodoItemProps } from "@/types/todo-type";
-import TodoCardItem from "./todo-card-item";
+import TodoCardItem from "../card-item/todo-card-item";
 import useFetchAllBoards from "@/hooks/boards/useFetchAllBoards";
 import { BoardItemProps } from "@/types/board-type";
-import BoardCardItem from "./board-card-item";
+import BoardCardItem from "../card-item/board-card-item";
 
 export default function FavoriteCardList() {
     const { debouncedSearchValue } = useSearchContext();
@@ -44,7 +44,7 @@ export default function FavoriteCardList() {
                     ) :
                         favoriteNotes && favoriteNotes.length > 0 ? (
                             favoriteNotes?.map((data: NoteItemProps) => (
-                                <CardItem key={data.id} data={data} />
+                                <NoteCardItem key={data.id} data={data} />
                             ))
                         ) : (
                             <div className="w-full">

@@ -36,5 +36,6 @@ export async function POST(req: Request) {
             }
         )
         }
+        console.log(error, "REGISTER_ERROR");
     }
 }

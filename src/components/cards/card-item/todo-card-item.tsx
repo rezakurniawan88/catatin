@@ -1,17 +1,17 @@
 import { format } from "date-fns";
 import { LucideArchive, LucideHeart, LucideLoader2, LucidePencil, LucidePin, LucideX } from "lucide-react";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { ScrollArea } from "../ui/scroll-area";
-import { Checkbox } from "../ui/checkbox";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../../ui/dialog";
+import { ScrollArea } from "../../ui/scroll-area";
+import { Checkbox } from "../../ui/checkbox";
 import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
 import useFetchAllTodos from "@/hooks/todos/useFetchAllTodos";
 import { TodoItemProps, TodoListProps } from "@/types/todo-type";
 import { useRef, useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import AlertDeleteTodo from "../alert-delete-todo";
-import { useToast } from "../ui/use-toast";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import AlertDeleteTodo from "../../alerts/delete/alert-delete-todo";
+import { useToast } from "../../ui/use-toast";
 import { usePathname } from "next/navigation";
 
 export default function TodoCardItem({ todo }: { todo: TodoItemProps }) {
@@ -194,7 +194,7 @@ export default function TodoCardItem({ todo }: { todo: TodoItemProps }) {
                 <DialogTrigger asChild>
                     <div className="absolute top-0 left-0 w-full h-full bg-transparent"></div>
                 </DialogTrigger>
-                <DialogContent className="max-w-full h-full sm:max-w-2xl sm:h-[90%] dark:bg-gray-900">
+                <DialogContent className="max-w-full h-full sm:max-w-2xl sm:h-[90%] dark:bg-gray-900 overflow-hidden">
                     <div className="relative pl-2 pr-1">
                         <div className="flex justify-between items-center">
                             <div className={isEditMode ? "mb-4" : ""}>
@@ -219,7 +219,7 @@ export default function TodoCardItem({ todo }: { todo: TodoItemProps }) {
                                 <Button onClick={() => onAddTodolist()} type="button" className="text-xs md:text-sm">{addTodolistIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : "Add"}</Button>
                             </div>
                         )}
-                        <ScrollArea className="w-full h-3/4 pb-4 pr-3">
+                        <ScrollArea className="w-full h-3/4 max-h-96 pb-8 pr-3">
                             <h1 className="text-sm font-medium text-slate-500 pb-2">Todos</h1>
                             <div className="space-y-2">
                                 {todoNotCompleted?.map((todo: TodoListProps, index: number) => (
@@ -243,7 +243,7 @@ export default function TodoCardItem({ todo }: { todo: TodoItemProps }) {
                                         {isEditMode ? null : (
                                             <>
                                                 {deleteTodolistIsLoading && checkedItemId === todo?.id ? (<LucideLoader2 size={16} className="animate-spin" />) : (
-                                                    <button type="button" onClick={() => onDeleteTodoList(todo?.id)} className="rounded-full p-1 text-red-500 hover:bg-slate-100"><LucideX size={14} /></button>
+                                                    <button type="button" onClick={() => onDeleteTodoList(todo?.id)} className="rounded-full p-1 text-red-500 hover:bg-slate-100 hover:dark:bg-slate-800"><LucideX size={14} /></button>
                                                 )}
                                             </>
                                         )}

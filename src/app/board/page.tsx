@@ -3,8 +3,8 @@ import Header from "@/components/header"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import ModalAddBoard from "@/components/modal/modal-add-board";
-import BoardCardList from "@/components/cards/board-card-list";
-import PinnedBoardCardList from "@/components/cards/pinned-board-card-list";
+import BoardCardList from "@/components/cards/card-lists/board-card-list";
+import PinnedBoardCardList from "@/components/cards/card-lists/pinned-board-card-list";
 
 export default async function BoardPage() {
     const session = await getServerSession(authOptions);

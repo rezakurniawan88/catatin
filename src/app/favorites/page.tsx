@@ -1,4 +1,4 @@
-import FavoriteCardList from '@/components/cards/favorite-card-list'
+import FavoriteCardList from '@/components/cards/card-lists/favorite-card-list'
 import Header from '@/components/header'
 import Sidebar from '@/components/sidebar'
 import { authOptions } from '@/lib/auth';

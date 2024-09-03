@@ -1,17 +1,17 @@
 import { NoteItemProps } from "@/types/notes-type";
 import { LucideArchive, LucideHeart, LucideLoader2, LucidePin } from "lucide-react";
-import ModalEditNote from "../modal/modal-edit-note";
-import AlertDelete from "../alert-delete";
+import ModalEditNote from "../../modal/modal-edit-note";
+import AlertDeleteNote from "../../alerts/delete/alert-delete-note";
 import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import useFetchAllNotes from "@/hooks/notes/useFetchAllNotes";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
-import { ScrollArea } from "../ui/scroll-area";
+import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
+import { ScrollArea } from "../../ui/scroll-area";
 import { usePathname } from "next/navigation";
 import { format } from "date-fns";
 
-export default function CardItem({ data }: { data: NoteItemProps }) {
+export default function NoteCardItem({ data }: { data: NoteItemProps }) {
     const { refetch: refetchAllNotes } = useFetchAllNotes();
     const formatDate = format(data?.createdAt, "d MMMM yyyy");
     const { toast } = useToast();
@@ -91,7 +91,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                     </div>
                     <div className="flex gap-2">
                         <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 z-30 dark:hover:bg-gray-600">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className={`w-4 ${data?.isArchived ? "text-slate-800 opacity-50" : "text-slate-500 opacity-100"}`} fill={data?.isArchived ? "gray" : "none"} />)}</div>
-                        <AlertDelete noteId={data.id} />
+                        <AlertDeleteNote noteId={data.id} />
                     </div>
                 </div>
 
@@ -113,7 +113,7 @@ export default function CardItem({ data }: { data: NoteItemProps }) {
                                 </div>
                                 <div className="flex gap-4">
                                     <div onClick={() => onChangeArchivedStatus()} className="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-slate-100 dark:hover:bg-gray-600">{changeArchivedStatusIsLoading ? (<LucideLoader2 size={16} className="animate-spin" />) : (<LucideArchive className={`w-4 ${data?.isArchived ? "text-slate-800 opacity-50" : "text-slate-500 opacity-100"}`} fill={data?.isArchived ? "gray" : "none"} />)}</div>
-                                    <AlertDelete noteId={data.id} />
+                                    <AlertDeleteNote noteId={data.id} />
                                 </div>
                             </div>
                         </div>

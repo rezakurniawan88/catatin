@@ -1,13 +1,21 @@
+import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 // Get Note By ID
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const id = params.id;
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    };
+
     try {
         const note = await prisma.note.findUnique({
             where: {
-                id
+                id,
+                userId: session?.id
             }
         });
     
@@ -31,7 +39,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             }
         );   
     } catch (error) {
-        console.log(error);
+        console.log(error, "GET_NOTE_BY_ID_ERROR");
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }
 
@@ -39,11 +48,16 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const id = params.id;
     const { title, content } = await req.json();
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    };
 
     try {
         const note = await prisma.note.update({
             where: {
-                id
+                id,
+                userId: session?.id
             },
             data: {
                 title,
@@ -61,18 +75,24 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
             }
         );   
     } catch (error) {
-        console.log(error);
+        console.log(error, "UPDATE_NOTE_ERROR");
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }
 
 // Delete Note
 export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
     const id = params.id;
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    };
     
     try {
         await prisma.note.delete({
             where: {
-                id
+                id,
+                userId: session?.id
             }
         });
     
@@ -85,7 +105,7 @@ export async function DELETE(req: NextRequest, {params}: {params: {id: string}})
             }
         );   
     } catch (error) {
-        console.log(error);
-        
+        console.log(error, "DELETE_NOTE_ERROR");
+        return NextResponse.json("Internal Server Error", { status: 500});
     }
 }

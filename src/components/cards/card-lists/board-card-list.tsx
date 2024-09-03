@@ -1,8 +1,8 @@
 "use client"
 
-import LoadingCard from '../loading-card'
+import LoadingCard from '../../loading-card'
 import useFetchAllBoards from '@/hooks/boards/useFetchAllBoards';
-import BoardCardItem from './board-card-item';
+import BoardCardItem from '../card-item/board-card-item';
 import { useSearchContext } from '@/context/search-context';
 import { BoardItemProps } from '@/types/board-type';
 

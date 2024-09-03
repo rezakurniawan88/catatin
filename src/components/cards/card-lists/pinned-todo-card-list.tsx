@@ -1,11 +1,11 @@
 "use client"
 
 import useFetchAllTodos from '@/hooks/todos/useFetchAllTodos';
-import LoadingCard from '../loading-card'
-import TodoCardItem from './todo-card-item'
+import LoadingCard from '../../loading-card'
+import TodoCardItem from '../card-item/todo-card-item'
 import { TodoItemProps } from '@/types/todo-type';
 import { useSearchContext } from '@/context/search-context';
-import Search from '../search';
+import Search from '../../search';
 
 export default function PinnedTodoCardList() {
     const { debouncedSearchValue } = useSearchContext();
@@ -20,7 +20,7 @@ export default function PinnedTodoCardList() {
     return (
         <>
             <Search display={true} />
-            <h1 className="font-bold font-sans text-xl mt-6">To Do List</h1>
+            <h1 className="font-bold font-sans text-xl mt-6 md:mt-0">To Do List</h1>
             <div className={`pinned mt-4 mb-10 ${pinnedTodos?.length === 0 ? "hidden" : ""}`}>
                 <h1 className="font-sans text-sm text-slate-400">Pinned</h1>
                 <div className="flex gap-4 flex-wrap py-3">

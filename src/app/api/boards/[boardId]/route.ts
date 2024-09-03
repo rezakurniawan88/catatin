@@ -33,10 +33,16 @@ export async function PATCH(req: Request, {params}: {params: {boardId: string}})
     const { boardId } = params;
     const { snapshot } = await req.json();
 
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    };
+
     try {
         const board = await prisma.board.update({
             where: {
-                id: boardId
+                id: boardId,
+                userId: session?.id
             },
             data: {
                 data: snapshot
@@ -45,7 +51,7 @@ export async function PATCH(req: Request, {params}: {params: {boardId: string}})
 
         return NextResponse.json({ data: board, message: "Board saved successfully"}, { status: 200 });
     } catch (error) {
-        console.log(error, "GET_BOARD_BY_ID_ERROR");
+        console.log(error, "SAVE_CHANGE_BOARD_ERROR");
         return NextResponse.json("Internal Server Error", { status: 500});
     }
 }

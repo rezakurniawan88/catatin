@@ -1,8 +1,8 @@
 import { LucideLoader2 } from "lucide-react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../../ui/alert-dialog";
 import { useMutation } from "react-query";
 import { axiosInstance } from "@/lib/axios";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import useFetchAllKanbans from "@/hooks/kanbans/useFetchAllKanbans";
 
 export default function AlertDeleteKanban({ kanbanId }: { kanbanId: string }) {

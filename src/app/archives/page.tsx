@@ -1,4 +1,4 @@
-import ArchivedCardList from '@/components/cards/archived-card-list'
+import ArchivedCardList from '@/components/cards/card-lists/archived-card-list'
 import Header from '@/components/header'
 import Sidebar from '@/components/sidebar'
 import { authOptions } from '@/lib/auth';
